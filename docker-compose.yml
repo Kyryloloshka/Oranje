@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  sql:
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Password123@"
+    ports:
+      - "1433:1433"
