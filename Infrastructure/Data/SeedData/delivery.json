@@ -1,0 +1,26 @@
+[
+  {
+    "ShortName": "UPS1",
+    "Description": "Найшвидша доставка",
+    "DeliveryTime": "1-2 Днів",
+    "Price": 10
+  },
+  {
+    "ShortName": "UPS2",
+    "Description": "Баланс між ціною та швидкістю",
+    "DeliveryTime": "2-5 Днів",
+    "Price": 5
+  },
+  {
+    "ShortName": "UPS3",
+    "Description": "Дешевше, але довше",
+    "DeliveryTime": "5-10 Днів",
+    "Price": 2
+  },
+  {
+    "ShortName": "БЕЗКОШТОВНО",
+    "Description": "Безкоштовно! Ви отримуєте отримуєте, що замовили",
+    "DeliveryTime": "1-2 Днів",
+    "Price": 0
+  }
+]
