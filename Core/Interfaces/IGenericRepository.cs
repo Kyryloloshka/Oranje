@@ -18,4 +18,5 @@ public interface IGenericRepository<T> where T : BaseEntity
     void Delete(T entity);
     Task<bool> SaveChangesAsync();
     bool Exist(int id);
+    Task<int> CountAsync(ISpecification<T> spec);
 }
