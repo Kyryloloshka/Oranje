@@ -3,7 +3,7 @@
     "Name": "Турбо мотоцикл 'Швидкість 3000'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus placerat justo in eros elementum, non aliquet risus fermentum.",
     "Price": 3700,
-    "PictureUrl": "/images/products/motorcycle-speed3000.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Мотоцикли",
     "Brand": "Турбо",
     "QuantityInStock": 12
@@ -12,7 +12,7 @@
     "Name": "Смартгодинник 'Гіга Візор'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis urna nec ipsum tempus hendrerit vel nec lorem.",
     "Price": 650,
-    "PictureUrl": "/images/products/smartwatch-gigavisor.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Годинники",
     "Brand": "Гіга",
     "QuantityInStock": 40
@@ -21,7 +21,7 @@
     "Name": "Електросамокат 'Зіппер 2024'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at purus id turpis luctus posuere.",
     "Price": 900,
-    "PictureUrl": "/images/products/scooter-zipper2024.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Самокати",
     "Brand": "Зіппер",
     "QuantityInStock": 25
@@ -30,7 +30,7 @@
     "Name": "Ноутбук 'Техно Профі 500'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel sapien vitae nulla facilisis fermentum.",
     "Price": 2200,
-    "PictureUrl": "/images/products/laptop-technopro500.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Ноутбуки",
     "Brand": "Техно",
     "QuantityInStock": 30
@@ -39,7 +39,7 @@
     "Name": "Рюкзак 'Мандрівник Про'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper lacus in mauris suscipit, nec ultrices sapien tristique.",
     "Price": 120,
-    "PictureUrl": "/images/products/backpack-travelerpro.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Рюкзаки",
     "Brand": "Мандрівник",
     "QuantityInStock": 70
@@ -48,7 +48,7 @@
     "Name": "Телевізор 'Ультра Віжн 8К'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consectetur metus eget massa faucibus, non gravida mi lacinia.",
     "Price": 5000,
-    "PictureUrl": "/images/products/tv-ultravision8k.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Телевізори",
     "Brand": "Ультра",
     "QuantityInStock": 15
@@ -57,7 +57,7 @@
     "Name": "Навушники 'АудіоМаг 300'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus malesuada tortor nec metus faucibus, non cursus sapien porttitor.",
     "Price": 150,
-    "PictureUrl": "/images/products/headphones-audiomag300.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Навушники",
     "Brand": "АудіоМаг",
     "QuantityInStock": 100
@@ -66,7 +66,7 @@
     "Name": "Смартфон 'Технофон X3'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis risus et velit egestas tempor.",
     "Price": 800,
-    "PictureUrl": "/images/products/smartphone-technophonex3.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Смартфони",
     "Brand": "Технофон",
     "QuantityInStock": 45
@@ -75,7 +75,7 @@
     "Name": "Розумна лампа 'Світло 360'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at eros ut mi consectetur efficitur.",
     "Price": 50,
-    "PictureUrl": "/images/products/smartlamp-light360.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Лампи",
     "Brand": "Світло",
     "QuantityInStock": 150
@@ -84,7 +84,7 @@
     "Name": "Фітнес-трекер 'Актив 24/7'",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu nunc sed nulla tempus bibendum non eget risus.",
     "Price": 180,
-    "PictureUrl": "/images/products/fitnesstracker-active247.png",
+    "PictureUrl": "https://www.zooplus.co.uk/magazine/wp-content/uploads/2021/01/striped-grey-kitten.jpg",
     "Type": "Фітнес-трекери",
     "Brand": "Актив",
     "QuantityInStock": 60
