@@ -92,7 +92,13 @@ $customTheme: mat.define-theme();
   .mdc-raised-button,
   .mdc-stroked-button,
   .mdc-flat-button {
-    @apply rounded-md;
+    @apply rounded-md text-primary-500;
+  }
+  .mdc-button__label {
+    @apply text-primary-500;
+  }
+  .mat-stroked-button .mdc-button__label {
+    @apply text-white;
   }
   .mdc-stroked-button {
     @apply text-primary-500 border-primary-500;

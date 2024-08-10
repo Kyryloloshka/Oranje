@@ -1,18 +1,10 @@
 <div class="flex flex-col gap-3">
   <div class="flex justify-end gap-3">
-    <button
-      (click)="openFiltersDialog()"
-      mat-stroked-button
-      class="bg-primary-500 text-white"
-    >
-      Filters
+    <button (click)="openFiltersDialog()" mat-stroked-button>
+      Фільтрування
     </button>
-    <button
-      [matMenuTriggerFor]="sortMenu"
-      mat-stroked-button
-      class="bg-primary-500 text-white"
-    >
-      Sort
+    <button [matMenuTriggerFor]="sortMenu" mat-stroked-button>
+      Сортування
     </button>
   </div>
   <div class="product-list">
@@ -20,6 +12,15 @@
     <app-product-item [product]="product"></app-product-item>
     }
   </div>
+  <mat-paginator
+    (page)="handlePageChange($event)"
+    [length]="pagination?.count"
+    [pageSize]="pagination?.pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="shopParams.pageIndex - 1"
+    aria-label="Оберіть сторінку"
+    class="self-center mx-auto bg-transparent"
+  ></mat-paginator>
 </div>
 
 <mat-menu #sortMenu="matMenu">
@@ -30,7 +31,7 @@
     @for (sort of sortOptions; track $index) {
     <mat-list-option
       [value]="sort.value"
-      [selected]="selectedSort === sort.value"
+      [selected]="shopParams.sort === sort.value"
     >
       {{ sort.name }}
     </mat-list-option>

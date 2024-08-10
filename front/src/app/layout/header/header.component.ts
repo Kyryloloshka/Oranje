@@ -18,15 +18,15 @@ export class HeaderComponent {
   }
   links = [
     {
-      name: 'Home',
+      name: 'Домашня сторінка',
       url: '/',
     },
     {
-      name: 'Products',
+      name: 'Продукти',
       url: '/products',
     },
     {
-      name: 'Cart',
+      name: 'Кошик',
       url: '/cart',
     },
   ];

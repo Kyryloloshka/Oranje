@@ -4,7 +4,7 @@
   <div
     class="flex align-middle items-center justify-between max-w-screen-2xl mx-auto"
   >
-    <a class="text-2xl font-semibold text-primary-500" href="/">Oranje</a>
+    <a class="text-2xl font-bold text-primary-500" href="/">Oranje</a>
     <nav class="flex gap-10 my-2">
       <a
         *ngFor="let link of links; trackBy: trackByUrl"
@@ -25,9 +25,9 @@
         <mat-icon>shopping_cart</mat-icon>
       </a>
 
-      <button routerLink="/account/login" mat-stroked-button>Login</button>
+      <button routerLink="/account/login" mat-stroked-button>Увійти</button>
       <button routerLink="/account/register" mat-stroked-button>
-        Register
+        Зареєструватися
       </button>
     </div>
   </div>

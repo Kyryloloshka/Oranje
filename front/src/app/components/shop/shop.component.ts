@@ -11,6 +11,10 @@ import {
   MatSelectionList,
   MatSelectionListChange,
 } from '@angular/material/list';
+import { ShopParams } from '../../shared/models/shop-params.class';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Pagination } from '../../shared/models/pagination.interface';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
@@ -22,6 +26,7 @@ import {
     MatMenu,
     MatSelectionList,
     MatListOption,
+    MatPaginator,
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
@@ -29,14 +34,15 @@ import {
 export class ShopComponent {
   constructor(private shopService: ShopService, private dialog: MatDialog) {}
   products: Product[] = [];
-  selectedBrands: string[] = [];
-  selectedTypes: string[] = [];
-  selectedSort: string = 'name';
+  pagination?: Pagination<Product>;
   sortOptions = [
     { name: 'За назвою', value: 'name' },
     { name: 'За зростанням ціни', value: 'priceAsc' },
     { name: 'За спаданням ціни', value: 'priceDesc' },
   ];
+  pageSizeOptions = [6, 12, 24];
+
+  shopParams = new ShopParams();
 
   initShop(): void {
     this.shopService.getTypes();
@@ -45,22 +51,30 @@ export class ShopComponent {
   }
 
   uploadProducts(): void {
-    this.shopService
-      .getProducts(this.selectedBrands, this.selectedTypes, this.selectedSort)
-      .subscribe({
-        next: (res) => (this.products = res.data),
-        error: (error) => console.error(error),
-      });
+    this.shopService.getProducts(this.shopParams).subscribe({
+      next: (res) => {
+        this.pagination = res;
+        this.products = res.data;
+      },
+      error: (error) => console.error(error),
+    });
   }
 
   ngOnInit(): void {
     this.initShop();
   }
 
+  handlePageChange(event: PageEvent): void {
+    this.shopParams.pageIndex = event.pageIndex + 1;
+    this.shopParams.pageSize = event.pageSize;
+    this.uploadProducts();
+  }
+
   onSortChange(event: MatSelectionListChange): void {
     const selectedOption = event.options[0];
     if (selectedOption) {
-      this.selectedSort = selectedOption.value;
+      this.shopParams.sort = selectedOption.value;
+      this.shopParams.pageIndex = 1;
       this.uploadProducts();
     }
   }
@@ -69,8 +83,8 @@ export class ShopComponent {
     const dialogRef = this.dialog.open(FiltersDialogComponent, {
       minWidth: '300px',
       data: {
-        selectedBrands: this.selectedBrands,
-        selectedTypes: this.selectedTypes,
+        selectedBrands: this.shopParams.brands,
+        selectedTypes: this.shopParams.types,
       },
     });
     dialogRef.afterClosed().subscribe({
@@ -78,8 +92,9 @@ export class ShopComponent {
         if (result) {
           console.log(result);
 
-          this.selectedBrands = result.selectedBrands;
-          this.selectedTypes = result.selectedTypes;
+          this.shopParams.brands = result.selectedBrands;
+          this.shopParams.types = result.selectedTypes;
+          this.shopParams.pageIndex = 1;
           this.uploadProducts();
         }
       },
