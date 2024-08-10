@@ -1,3 +1,13 @@
-<h1 class="text-3xl font-bold underline text-red-500">
-  Hello world! {{ title }} {{ title }}
-</h1>
+<app-header></app-header>
+
+<div
+  class="container mt-[70px] flex flex-col gap-3 items-center justify-center"
+>
+  <h2 class="text-3xl text-orange-500 font-bold">Welcome to {{ title }}</h2>
+  <h5>PRODUCTS</h5>
+  <ul class="flex flex-col gap-1 items-center">
+    @for (product of products; track product.id) {
+    <li>{{ product.name }}</li>
+    }
+  </ul>
+</div>
