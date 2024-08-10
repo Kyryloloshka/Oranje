@@ -15,6 +15,7 @@ import { ShopParams } from '../../shared/models/shop-params.class';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pagination } from '../../shared/models/pagination.interface';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-shop',
@@ -27,6 +28,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectionList,
     MatListOption,
     MatPaginator,
+    FormsModule,
+    MatIcon,
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
@@ -62,6 +65,11 @@ export class ShopComponent {
 
   ngOnInit(): void {
     this.initShop();
+  }
+
+  onSearchChange(): void {
+    this.shopParams.pageIndex = 1;
+    this.uploadProducts();
   }
 
   handlePageChange(event: PageEvent): void {
