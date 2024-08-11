@@ -1,10 +1,10 @@
 @if (product) {
 
 <div
-  class="hover:scale-[1.02] border-card h-full rounded-xl hover:bg-light-1 transition p-5 flex flex-col relative duration-300 ease-in-out group hover:shadow-3xl"
+  class="hover:scale-[1.02] border-light-6 border h-full rounded-xl hover:bg-light-1 transition p-5 flex flex-col relative duration-300 ease-in-out group hover:shadow-3xl"
 >
   <a
-    [href]="product.id"
+    routerLink="/product/{{ product.id }}"
     class="flex aspect-square scale-100 overflow-hidden items-center justify-center group-hover:scale-105 pb-2 transition-transform duration-300 ease-in-out cursor-pointer relative"
   >
     <img
@@ -25,12 +25,12 @@
         {{ product.price | currency }}
       </p>
       <button class="bg-primary-500 text-white px-3 py-2 rounded-md">
-        Add to cart
+        В кошик
       </button>
     </div>
   </div>
   <div
-    class="absolute top-0 right-0 bg-primary-500 text-white px-2 py-1 rounded-bl-md rounded-tr-md"
+    class="absolute top-0 right-0 bg-primary-400 text-light-2 px-2 py-1 rounded-bl-md rounded-tr-md"
   >
     <p class="text-sm font-semibold">{{ product.type }}</p>
   </div>

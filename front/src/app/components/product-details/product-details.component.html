@@ -1,0 +1,37 @@
+@if (product) {
+<section class="py-8">
+  <div class="max-w-screen-2xl px-4 mx-auto">
+    <div class="grid grid-cols-2 gap-8">
+      <div class="max-w-xl mx-auto">
+        <img
+          class="w-full"
+          src="{{ product.pictureUrl }}"
+          alt="{{ product.name }}"
+        />
+      </div>
+      <div class="flex flex-col gap-4">
+        <h1 class="text-xl font-semibold text-primary-600">
+          {{ product.name }}
+        </h1>
+        <div class="items-center gap-4 flex">
+          <p class="text-lg font-semibold text-primary-500">
+            {{ product.price | currency }}
+          </p>
+          <button class="bg-primary-500 text-white px-3 py-2 rounded-md">
+            В кошик
+          </button>
+        </div>
+        <p class="text-sm text-gray-500">{{ product.description }}</p>
+        <div class="flex gap-2">
+          <p class="text-sm font-semibold">Категорія:</p>
+          <p class="text-sm">{{ product.type }}</p>
+        </div>
+        <div class="flex gap-2">
+          <p class="text-sm font-semibold">Виробник:</p>
+          <p class="text-sm">{{ product.brand }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+}

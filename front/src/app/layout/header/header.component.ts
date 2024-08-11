@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { MatBadge } from '@angular/material/badge';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIcon, MatButton, MatBadge, RouterModule, CommonModule],
+  imports: [MatIcon, MatButton, MatBadge, CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -18,16 +18,16 @@ export class HeaderComponent {
   }
   links = [
     {
-      name: 'Домашня сторінка',
-      url: '/',
+      name: 'Акції',
+      url: '/promotions',
     },
     {
-      name: 'Продукти',
-      url: '/products',
+      name: 'Новини',
+      url: '/news',
     },
     {
-      name: 'Кошик',
-      url: '/cart',
+      name: 'Служба підтримки',
+      url: '/support',
     },
   ];
 }
