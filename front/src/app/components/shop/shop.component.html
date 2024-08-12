@@ -21,10 +21,18 @@
       </button>
     </form>
     <div class="flex justify-end gap-3">
-      <button (click)="openFiltersDialog()" mat-stroked-button>
+      <button
+        class="border-primary-500"
+        (click)="openFiltersDialog()"
+        mat-stroked-button
+      >
         Фільтрування
       </button>
-      <button [matMenuTriggerFor]="sortMenu" mat-stroked-button>
+      <button
+        class="border-primary-500"
+        [matMenuTriggerFor]="sortMenu"
+        mat-stroked-button
+      >
         Сортування
       </button>
     </div>

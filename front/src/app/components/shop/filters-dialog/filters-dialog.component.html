@@ -2,7 +2,7 @@
   <h3 class="text-3xl text-center pt-6 mb-3">Filters</h3>
   <div class="flex p-4">
     <div class="w-1/2">
-      <h4 class="text-xl font-semibold">Brands</h4>
+      <h4 class="text-xl font-semibold text-primary-500">Brands</h4>
       <mat-selection-list [(ngModel)]="selectedBrands" [multiple]="true">
         @for (brand of shop.brands; track $index) {
         <mat-list-option [value]="brand">{{ brand }}</mat-list-option>
@@ -10,7 +10,7 @@
       </mat-selection-list>
     </div>
     <div class="w-1/2">
-      <h4 class="text-xl font-semibold">Types</h4>
+      <h4 class="text-xl font-semibold text-primary-500">Types</h4>
       <mat-selection-list [(ngModel)]="selectedTypes" [multiple]="true">
         @for (type of shop.types; track $index) {
         <mat-list-option [value]="type">{{ type }}</mat-list-option>
@@ -19,6 +19,12 @@
     </div>
   </div>
   <div class="flex justify-end p-4">
-    <button mat-flat-button (click)="applyFilters()">Apply</button>
+    <button
+      mat-stroked-button
+      class="border-primary-500"
+      (click)="applyFilters()"
+    >
+      Apply
+    </button>
   </div>
 </div>

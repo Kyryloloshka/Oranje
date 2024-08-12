@@ -1,0 +1,13 @@
+<div class="container mt-5 p-4 bg-light-3 rounded shadow-lg">
+  <h1>Internal Server Error 500</h1>
+  @if (error) {
+  <h5 class="text-red-600">Error: {{ error.message }}</h5>
+  <p>This error comes from the server</p>
+  <p class="mb-2">What to do next?</p>
+  <ol class="list-decimal ml-5 mb-4">
+    <li>Nothing</li>
+  </ol>
+  <h5 class="text-lg font-medium mb-2">Stack trace</h5>
+  <pre class="bg-light-2 p-2 rounded-lg">{{ error.details }}</pre>
+  }
+</div>

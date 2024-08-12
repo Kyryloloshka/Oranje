@@ -136,3 +136,13 @@ $customTheme: mat.define-theme();
     @apply bg-light-2 text-dark-2;
   }
 }
+
+.mat-mdc-snack-bar-container.toast-error {
+  --mdc-snackbar-container-color: red;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+.mat-mdc-snack-bar-container.toast-success {
+  --mdc-snackbar-container-color: green;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
