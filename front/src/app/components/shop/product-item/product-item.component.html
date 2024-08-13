@@ -14,7 +14,7 @@
     />
   </a>
   <div class="flex flex-col gap-2 mt-3 flex-auto">
-    <a [href]="product.id">
+    <a routerLink="/product/{{ product.id }}">
       <h3 class="text-xl font-semibold text-gray-800">
         {{ product.name }}
       </h3>
@@ -24,7 +24,10 @@
       <p class="text-lg font-semibold text-primary-500">
         {{ product.price | currency }}
       </p>
-      <button class="bg-primary-500 text-white px-3 py-2 rounded-md">
+      <button
+        (click)="cartService.addItemToCart(product)"
+        class="bg-primary-500 text-white px-3 py-2 rounded-md"
+      >
         В кошик
       </button>
     </div>

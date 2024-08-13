@@ -1,5 +1,5 @@
 <header
-  class="border-b shadow-3xl p-3 w-full min-h-20 flex items-center fixed top-0 z-50 bg-light-2"
+  class="container border-b shadow-3xl w-full min-h-20 flex items-center fixed top-0 z-50 bg-light-2"
 >
   <div
     class="flex align-middle items-center justify-between max-w-screen-2xl mx-auto flex-auto"
@@ -17,7 +17,7 @@
       <a
         routerLink="/cart"
         routerLinkActive="active"
-        matBadge="5"
+        [matBadge]="cartService.itemCount()"
         matBadgeSize="medium"
         class="custom-badge pt-2"
       >
