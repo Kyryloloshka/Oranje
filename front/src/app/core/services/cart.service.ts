@@ -1,14 +1,16 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Cart, ICartItem } from '../../shared/models/cart.interface';
 import { Product } from '../../shared/models/product.interface';
 import { firstValueFrom, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  router = inject(Router);
   baseUrl = environment.apiUrl;
   cart = signal<Cart | null>(null);
   itemCount = computed(() =>
@@ -17,15 +19,15 @@ export class CartService {
   totals = computed(() => {
     const cart = this.cart();
     if (!cart) return null;
-    
+
     const subtotal = cart.items.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
-    
+
     const shipping = 0;
     const discount = 0;
-    
+
     return {
       subtotal,
       shipping,
@@ -58,6 +60,26 @@ export class CartService {
     }
     cart.items = this.addOrUpdateItem(cart.items, item, quantity);
     this.setCart(cart);
+  }
+
+  removeItemFromCart(productId: number, quantity = 1) {
+    const cart = this.cart();
+    if (!cart) return;
+    const index = cart.items.findIndex((i) => i.productId === productId);
+
+    if (index !== -1) {
+      if (cart.items[index].quantity > quantity) {
+        cart.items[index].quantity -= quantity;
+      } else {
+        cart.items.splice(index, 1);
+      }
+      if (cart.items.length === 0) {
+        this.deleteCart();
+        this.router.navigateByUrl('/');
+      } else {
+        this.setCart(cart);
+      }
+    }
   }
 
   private addOrUpdateItem(

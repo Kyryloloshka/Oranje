@@ -12,11 +12,10 @@ import { OrderSummaryComponent } from "../../shared/components/order-summary/ord
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  private router = inject(Router)
-  cartService = inject(CartService);
+  constructor(private router: Router, protected cartService: CartService) {}
   
   onAction() {
-    this.router.navigateByUrl('/shop');
+    this.router.navigateByUrl('/');
   }
 
 }
