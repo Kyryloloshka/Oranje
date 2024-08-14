@@ -146,3 +146,7 @@ $customTheme: mat.define-theme();
   --mdc-snackbar-container-color: green;
   --mdc-snackbar-supporting-text-color: #fff;
 }
+
+.mdc-notched-outline__notch {
+  border-right-style: none !important;
+}
