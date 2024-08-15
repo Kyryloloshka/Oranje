@@ -1,25 +1,6 @@
 version: "3.8"
 
 services:
-  api:
-    image: mcr.microsoft.com/dotnet/aspnet:6.0 # або твоя версія .NET
-    container_name: api-container
-    ports:
-      - "5000:80"
-    volumes:
-      - ./api:/app
-    working_dir: /app
-    command: ["dotnet", "watch"]
-
-  frontend:
-    image: node:14-alpine # або інша версія Node.js
-    container_name: frontend-container
-    ports:
-      - "4200:4200"
-    volumes:
-      - ./front:/app
-    working_dir: /app
-    command: ["npm", "start"]
   sql:
     image: mcr.microsoft.com/azure-sql-edge
     environment:

@@ -13,13 +13,29 @@
         <h1 class="text-xl font-semibold text-primary-600">
           {{ product.name }}
         </h1>
-        <div class="items-center gap-4 flex">
+
+        @if (quantityInCart > 0) {
+        <div class="flex items-center gap-2">
+          <p class="text-sm font-semibold">Кількість в кошику:</p>
+          <p class="text-sm">{{ quantityInCart }}</p>
+        </div>
+        }
+
+        <div class="items-center gap-4 flex flex-wrap">
           <p class="text-lg font-semibold text-primary-500">
             {{ product.price | currency }}
           </p>
-          <button class="bg-primary-500 text-white px-3 py-2 rounded-md">
-            В кошик
+          <button
+            (click)="updateCart()"
+            [disabled]="quantity === quantityInCart"
+            class="bg-primary-500 disabled:opacity-60 text-white px-3 py-2 rounded-md"
+          >
+            {{ getButtonLabel() }}
           </button>
+          <mat-form-field appearance="outline" class="flex">
+            <mat-label>Кількість</mat-label>
+            <input matInput type="number" min="0" [(ngModel)]="quantity" />
+          </mat-form-field>
         </div>
         <p class="text-sm text-gray-500">{{ product.description }}</p>
         <div class="flex gap-2">

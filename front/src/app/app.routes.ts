@@ -4,6 +4,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { NotFoundComponent } from './shared/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './shared/errors/server-error/server-error.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: ShopComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];

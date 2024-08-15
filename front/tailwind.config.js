@@ -13,6 +13,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        "primary-200": "var(--primary-200)",
+        "primary-300": "var(--primary-300)",
         "primary-400": "var(--primary-400)",
         "primary-500": "var(--primary-500)",
         "primary-600": "var(--primary-600)",
