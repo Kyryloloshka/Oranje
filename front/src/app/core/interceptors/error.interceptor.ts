@@ -25,13 +25,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           }
           break;
         case 401:
-          toast.error(error.error.title || error.error);
+          toast.error(error.error?.title || error.error);
           break;
         case 404:
           router.navigateByUrl('/not-found');
           break;
         case 500:
-          const navigationExtras: NavigationExtras = { state: { error: error.error } };
+          const navigationExtras: NavigationExtras = {
+            state: { error: error.error },
+          };
           router.navigateByUrl('/server-error');
           break;
         default:

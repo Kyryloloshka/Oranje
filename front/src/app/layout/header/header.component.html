@@ -23,7 +23,11 @@
       >
         <mat-icon>shopping_cart</mat-icon>
       </a>
-
+      @if (accountService.currentUser()) {
+      <button class="border-primary-500" mat-stroked-button (click)="logout()">
+        logout
+      </button>
+      } @else {
       <button routerLink="/login" class="border-primary-500" mat-stroked-button>
         Увійти
       </button>
@@ -34,6 +38,7 @@
       >
         Зареєструватися
       </button>
+      }
     </div>
   </div>
 </header>
