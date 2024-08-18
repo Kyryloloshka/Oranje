@@ -37,7 +37,7 @@
         </dd>
       </dl>
     </div>
-
+    @if (location.path() !== '/checkout') {
     <div class="flex flex-col gap-2">
       <button
         routerLink="/checkout"
@@ -48,6 +48,7 @@
       </button>
       <button routerLink="/" mat-button>Продовжити покупки</button>
     </div>
+    }
   </div>
 
   <div
