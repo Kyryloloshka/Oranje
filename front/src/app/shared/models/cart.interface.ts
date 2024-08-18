@@ -3,6 +3,9 @@ import { nanoid } from 'nanoid';
 export interface ICart {
   id: string;
   items: ICartItem[];
+  deliveryMethodId?: number;
+  paymentIntentId?: string;
+  clientSecret?: string;
 }
 
 export interface ICartItem {
@@ -18,4 +21,7 @@ export interface ICartItem {
 export class Cart implements ICart {
   id = nanoid();
   items: ICartItem[] = [];
+  deliveryMethodId?: number;
+  paymentIntentId?: string;
+  clientSecret?: string;
 }
