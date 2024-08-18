@@ -1,14 +1,23 @@
-<section class="">
-  <div class="">
-    <div class="flex w-full items-start gap-6 mt-32">
-      <div class="w-3/4 flex flex-col gap-3">
-        @for (item of cartService.cart()?.items; track item.productId) {
-        <app-cart-item [item]="item"></app-cart-item>
-        }
-      </div>
-      <div class="w-1/4">
-        <app-order-summary></app-order-summary>
-      </div>
+<section>
+  @if (cartService.cart()?.items?.length! > 0) {
+
+  <div class="flex w-full items-start gap-6 mt-32">
+    <div class="w-3/4 flex flex-col gap-3">
+      @for (item of cartService.cart()?.items; track item.productId) {
+      <app-cart-item [item]="item"></app-cart-item>
+      }
+    </div>
+    <div class="w-1/4">
+      <app-order-summary></app-order-summary>
     </div>
   </div>
+
+  } @else {
+  <app-empty-cart
+    message="Your shopping cart is empty"
+    icon="shopping_cart"
+    actionText="Go to shop"
+    (action)="onAction()"
+  />
+  }
 </section>
