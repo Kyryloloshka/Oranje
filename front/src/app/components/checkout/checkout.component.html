@@ -1,7 +1,13 @@
 <div class="flex mt-32">
   <div class="w-3/4">
     <mat-stepper #stepper class="bg-white border border-gray-200 shadow-3xl">
-      <mat-step label="Address"> Address form </mat-step>
+      <mat-step label="Address">
+        <div class="" id="address-elem"></div>
+        <div class="flex justify-between mt-6">
+          <button routerLink="/" mat-stroke-button>Продовжити покупки</button>
+          <button matStepperNext mat-flat-button>Далі</button>
+        </div>
+      </mat-step>
       <mat-step label="Shipping"> Shipping form </mat-step>
       <mat-step label="Payment"> Payment form </mat-step>
       <mat-step label="Confirmation"> Confirmation form </mat-step>
