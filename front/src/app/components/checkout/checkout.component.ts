@@ -14,6 +14,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Address } from '../../shared/models/user.interface';
 import { firstValueFrom } from 'rxjs';
 import { AccountService } from '../../core/services/account.service';
+import { DeliveryComponent } from "./delivery/delivery.component";
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -23,7 +24,8 @@ import { AccountService } from '../../core/services/account.service';
     MatButton,
     RouterLink,
     MatCheckboxModule,
-  ],
+    DeliveryComponent
+],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
 })

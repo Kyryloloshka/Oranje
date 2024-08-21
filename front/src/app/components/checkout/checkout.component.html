@@ -16,7 +16,13 @@
           <button matStepperNext mat-flat-button>Далі</button>
         </div>
       </mat-step>
-      <mat-step label="Shipping"> Shipping form </mat-step>
+      <mat-step label="Shipping"> 
+        <app-delivery></app-delivery>
+        <div class="flex justify-between mt-6">
+          <button matStepperPrevious mat-stroke-button>Назад</button>
+          <button matStepperNext mat-flat-button>Далі</button>
+        </div>
+      </mat-step>
       <mat-step label="Payment"> Payment form </mat-step>
       <mat-step label="Confirmation"> Confirmation form </mat-step>
     </mat-stepper>
