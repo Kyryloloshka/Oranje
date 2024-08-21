@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
-import { loadStripe, Stripe, StripeAddressElement, StripeAddressElementOptions, StripeElements } from '@stripe/stripe-js';
+import {
+  loadStripe,
+  Stripe,
+  StripeAddressElement,
+  StripeAddressElementOptions,
+  StripeElements,
+} from '@stripe/stripe-js';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from './cart.service';
 import { Cart } from '../../shared/models/cart.interface';
 import { first, firstValueFrom, map } from 'rxjs';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +22,11 @@ export class StripeService {
   private elements?: StripeElements;
   private addressElem?: StripeAddressElement;
 
-  constructor(private http: HttpClient, private cartService: CartService) {
+  constructor(
+    private http: HttpClient,
+    private cartService: CartService,
+    private accountService: AccountService
+  ) {
     this.stripePromise = loadStripe(environment.stripePublicKey);
   }
 
@@ -38,15 +49,39 @@ export class StripeService {
     if (!this.addressElem) {
       const elements = await this.initElements();
       if (elements) {
+        const user = this.accountService.currentUser();
+        let defaultValues: StripeAddressElementOptions['defaultValues'] = {};
+
+        if (user?.firstName && user?.lastName) {
+          defaultValues.name = user.firstName + ' ' + user.lastName;
+        }
+
+        if (user?.address) {
+          defaultValues.address = {
+            line1: user.address.line1,
+            line2: user.address.line2,
+            city: user.address.city,
+            state: user.address.state,
+            country: user.address.country,
+            postal_code: user.address.postalCode,
+          };
+        }
+
         const options: StripeAddressElementOptions = {
           mode: 'shipping',
-        }
+          defaultValues: defaultValues,
+        };
         this.addressElem = elements.create('address', options);
       } else {
         throw new Error('Elements are not loaded');
       }
     }
     return this.addressElem;
+  }
+
+  disposeElems() {
+    this.elements = undefined;
+    this.addressElem = undefined;
   }
 
   async initElements() {
