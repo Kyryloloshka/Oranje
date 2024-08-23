@@ -4,7 +4,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { StripeService } from '../../core/services/stripe.service';
-import { StripeAddressElement } from '@stripe/stripe-js';
+import { StripeAddressElement, StripePaymentElement } from '@stripe/stripe-js';
 import { ToasterService } from '../../core/services/toaster.service';
 import {
   MatCheckboxChange,
@@ -31,8 +31,8 @@ import { DeliveryComponent } from "./delivery/delivery.component";
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
   private addressElem?: StripeAddressElement;
+  private paymentElem?: StripePaymentElement;
   protected saveAddress = false;
-
   constructor(
     private stripeService: StripeService,
     private toaster: ToasterService,
@@ -43,6 +43,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     try {
       this.addressElem = await this.stripeService.createAddressElem();
       this.addressElem.mount('#address-elem');
+      this.paymentElem = await this.stripeService.createPaymentElem();
+      this.paymentElem.mount('#payment-elem');
     } catch (error: any) {
       this.toaster.error(error.message);
     }
