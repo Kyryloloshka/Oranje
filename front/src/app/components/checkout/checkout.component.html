@@ -1,13 +1,17 @@
 <div class="flex mt-32">
   <div class="w-3/4">
-    <mat-stepper #stepper class="bg-white border border-gray-200 shadow-3xl" (selectionChange)="onStepChange($event)">
+    <mat-stepper
+      #stepper
+      class="bg-white border border-gray-200 shadow-3xl"
+      (selectionChange)="onStepChange($event)"
+    >
       <mat-step label="Address">
         <div class="" id="address-elem"></div>
         <div class="flex justify-end mt-1">
           <mat-checkbox
             [checked]="saveAddress"
             (change)="onSaveAddressChange($event)"
-          > 
+          >
             Зберегти як адресу за замовчуванням
           </mat-checkbox>
         </div>
@@ -16,21 +20,31 @@
           <button matStepperNext mat-flat-button>Далі</button>
         </div>
       </mat-step>
-      <mat-step label="Shipping"> 
+      <mat-step label="Shipping">
         <app-delivery></app-delivery>
         <div class="flex justify-between mt-6">
           <button matStepperPrevious mat-stroke-button>Назад</button>
           <button matStepperNext mat-flat-button>Далі</button>
         </div>
       </mat-step>
-      <mat-step label="Payment"> 
+      <mat-step label="Payment">
         <div id="payment-elem"></div>
         <div class="flex justify-between mt-6">
           <button matStepperPrevious mat-stroke-button>Назад</button>
           <button matStepperNext mat-flat-button>Далі</button>
         </div>
       </mat-step>
-      <mat-step label="Confirmation"> Confirmation form </mat-step>
+      <mat-step label="Confirmation">
+        <app-review></app-review>
+        <div class="flex justify-between mt-6">
+          <button matStepperPrevious mat-stroked-button>Back</button>
+          <button mat-flat-button>
+            <span
+              >Підтвердити {{ cartService.totals()?.total | currency }}</span
+            >
+          </button>
+        </div>
+      </mat-step>
     </mat-stepper>
   </div>
   <div class="w-1/4">
