@@ -3,9 +3,10 @@
     <mat-stepper
       #stepper
       class="bg-white border border-gray-200 shadow-3xl"
+      [linear]="true"
       (selectionChange)="onStepChange($event)"
     >
-      <mat-step label="Address">
+      <mat-step label="Address" [completed]="completionStatus().address">
         <div class="" id="address-elem"></div>
         <div class="flex justify-end mt-1">
           <mat-checkbox
@@ -19,23 +20,42 @@
           <button routerLink="/" class="z-0" mat-stroke-button>
             Продовжити покупки
           </button>
-          <button matStepperNext mat-flat-button class="z-0">Далі</button>
+          <button
+            [disabled]="!completionStatus().address"
+            matStepperNext
+            mat-flat-button
+            class="z-0"
+          >
+            Далі
+          </button>
         </div>
       </mat-step>
-      <mat-step label="Shipping">
+      <mat-step label="Shipping" [completed]="completionStatus().delivery">
         <app-delivery
           (deliveryCompleted)="handleDeliveryChange($event)"
         ></app-delivery>
         <div class="flex justify-between mt-6">
           <button matStepperPrevious mat-stroke-button>Назад</button>
-          <button matStepperNext mat-flat-button>Далі</button>
+          <button
+            [disabled]="!completionStatus().delivery"
+            matStepperNext
+            mat-flat-button
+          >
+            Далі
+          </button>
         </div>
       </mat-step>
-      <mat-step label="Payment">
+      <mat-step label="Payment" [completed]="completionStatus().payment">
         <div id="payment-elem"></div>
         <div class="flex justify-between mt-6">
           <button matStepperPrevious mat-stroke-button>Назад</button>
-          <button matStepperNext mat-flat-button>Далі</button>
+          <button
+            [disabled]="!completionStatus().payment"
+            matStepperNext
+            mat-flat-button
+          >
+            Далі
+          </button>
         </div>
       </mat-step>
       <mat-step label="Confirmation">
