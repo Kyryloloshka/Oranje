@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { CheckoutService } from '../../../core/services/checkout.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { CurrencyPipe } from '@angular/common';
@@ -13,6 +13,7 @@ import { DeliveryMethod } from '../../../shared/models/deliveryMethod.interface'
   styleUrl: './delivery.component.scss',
 })
 export class DeliveryComponent implements OnInit {
+  deliveryCompleted = output<boolean>();
   constructor(
     protected checkoutService: CheckoutService,
     protected cartService: CartService
@@ -27,6 +28,7 @@ export class DeliveryComponent implements OnInit {
           );
           if (method) {
             this.cartService.selectedDeliveryMethod.set(method);
+            this.deliveryCompleted.emit(true);
           }
         }
       },
@@ -39,6 +41,7 @@ export class DeliveryComponent implements OnInit {
     if (cart) {
       cart.deliveryMethodId = method.id;
       this.cartService.setCart(cart);
+      this.deliveryCompleted.emit(true);
     }
   }
 }

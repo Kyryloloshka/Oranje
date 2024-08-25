@@ -1,10 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { OrderSummaryComponent } from '../../shared/components/order-summary/order-summary.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { StripeService } from '../../core/services/stripe.service';
-import { StripeAddressElement, StripePaymentElement } from '@stripe/stripe-js';
+import {
+  StripeAddressElement,
+  StripeAddressElementChangeEvent,
+  StripePaymentElement,
+  StripePaymentElementChangeEvent,
+} from '@stripe/stripe-js';
 import { ToasterService } from '../../core/services/toaster.service';
 import {
   MatCheckboxChange,
@@ -14,8 +19,8 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Address } from '../../shared/models/user.interface';
 import { firstValueFrom } from 'rxjs';
 import { AccountService } from '../../core/services/account.service';
-import { DeliveryComponent } from "./delivery/delivery.component";
-import { ReviewComponent } from "./review/review.component";
+import { DeliveryComponent } from './delivery/delivery.component';
+import { ReviewComponent } from './review/review.component';
 import { CartService } from '../../core/services/cart.service';
 import { CurrencyPipe } from '@angular/common';
 @Component({
@@ -29,8 +34,8 @@ import { CurrencyPipe } from '@angular/common';
     MatCheckboxModule,
     DeliveryComponent,
     ReviewComponent,
-    CurrencyPipe
-],
+    CurrencyPipe,
+  ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
 })
@@ -38,24 +43,53 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private addressElem?: StripeAddressElement;
   private paymentElem?: StripePaymentElement;
   protected saveAddress = false;
-  
+  protected completionStatus = signal<{
+    address: boolean;
+    payment: boolean;
+    delivery: boolean;
+  }>({ address: false, payment: false, delivery: false });
+
   constructor(
     private stripeService: StripeService,
     private toaster: ToasterService,
     private accountService: AccountService,
-    protected cartService: CartService,
+    protected cartService: CartService
   ) {}
 
   async ngOnInit() {
     try {
       this.addressElem = await this.stripeService.createAddressElem();
       this.addressElem.mount('#address-elem');
+      this.addressElem.on('change', this.handleAddressChange);
+
       this.paymentElem = await this.stripeService.createPaymentElem();
       this.paymentElem.mount('#payment-elem');
+      this.paymentElem.on('change', this.handlePaymentChange);
     } catch (error: any) {
       this.toaster.error(error.message);
     }
   }
+
+  handleAddressChange = (event: StripeAddressElementChangeEvent) => {
+    this.completionStatus.update((state) => {
+      state.address = event.complete;
+      return state;
+    });
+  };
+
+  handlePaymentChange = (event: StripePaymentElementChangeEvent) => {
+    this.completionStatus.update((state) => {
+      state.payment = event.complete;
+      return state;
+    });
+  };
+
+  handleDeliveryChange = (event: boolean) => {
+    this.completionStatus.update((state) => {
+      state.delivery = event;
+      return state;
+    });
+  };
 
   onSaveAddressChange(event: MatCheckboxChange) {
     this.saveAddress = event.checked;
