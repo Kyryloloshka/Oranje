@@ -5,6 +5,7 @@ import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { StripeService } from '../../core/services/stripe.service';
 import {
+  ConfirmationToken,
   StripeAddressElement,
   StripeAddressElementChangeEvent,
   StripePaymentElement,
@@ -48,6 +49,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     payment: boolean;
     delivery: boolean;
   }>({ address: false, payment: false, delivery: false });
+  protected confirmationToken?: ConfirmationToken;
 
   constructor(
     private stripeService: StripeService,
@@ -104,6 +106,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
     if (event.selectedIndex === 2) {
       await firstValueFrom(this.stripeService.createOrUpdatePaymentMethod());
+    }
+    if (event.selectedIndex === 3) {
+      await this.getConfirmationToken();
+    }
+  }
+
+  async getConfirmationToken() {
+    try {
+      if (Object.values(this.completionStatus()).every((status) => status)) {
+        const result = await this.stripeService.createConfirmationToken();
+        if (result.error) throw new Error(result.error.message);
+        this.confirmationToken = result.confirmationToken;
+        console.log(this.confirmationToken);
+      }
+    } catch (error: any) {
+      this.toaster.error(error.message);
     }
   }
 

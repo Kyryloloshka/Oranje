@@ -59,6 +59,17 @@ export class StripeService {
     return this.paymentElem;
   }
 
+  async createConfirmationToken() {
+    const stripe = await this.getStripeInstanse();
+    const elements = await this.initElements();
+    const result = await elements.submit();
+    if (result.error) throw new Error(result.error.message);
+    if (stripe) {
+      return await stripe.createConfirmationToken({elements});
+    }
+    throw new Error('Stripe is not loaded');
+  }
+
   async createAddressElem() {
     if (!this.addressElem) {
       const elements = await this.initElements();
