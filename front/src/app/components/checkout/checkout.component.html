@@ -59,7 +59,7 @@
         </div>
       </mat-step>
       <mat-step label="Confirmation">
-        <app-review></app-review>
+        <app-review [confirmationToken]="confirmationToken"></app-review>
         <div class="flex justify-between mt-6">
           <button matStepperPrevious mat-stroked-button>Back</button>
           <button mat-flat-button>
