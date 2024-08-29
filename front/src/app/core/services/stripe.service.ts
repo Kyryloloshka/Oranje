@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+	ConfirmationToken,
   loadStripe,
   Stripe,
   StripeAddressElement,
@@ -59,13 +60,38 @@ export class StripeService {
     return this.paymentElem;
   }
 
+  getStripeInstance() {
+    return this.stripePromise;
+  }
+
+  async confirmPayment(confirmationToken: ConfirmationToken) {
+    const stripe = await this.getStripeInstance();
+    const elements = await this.initElements();
+    const result = await elements.submit();
+    if (result.error) throw new Error(result.error.message);
+
+    const clientSecret = this.cartService.cart()?.clientSecret;
+
+    if (stripe && clientSecret) {
+      return await stripe.confirmPayment({
+        clientSecret: clientSecret,
+        confirmParams: {
+          confirmation_token: confirmationToken.id,
+        },
+        redirect: 'if_required',
+      });
+    } else {
+      throw new Error('Unable to load stripe');
+    }
+  }
+
   async createConfirmationToken() {
     const stripe = await this.getStripeInstanse();
     const elements = await this.initElements();
     const result = await elements.submit();
     if (result.error) throw new Error(result.error.message);
     if (stripe) {
-      return await stripe.createConfirmationToken({elements});
+      return await stripe.createConfirmationToken({ elements });
     }
     throw new Error('Stripe is not loaded');
   }

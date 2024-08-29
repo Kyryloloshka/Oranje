@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { OrderSummaryComponent } from '../../shared/components/order-summary/order-summary.component';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatButton } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { StripeService } from '../../core/services/stripe.service';
 import {
   ConfirmationToken,
@@ -24,6 +24,8 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { ReviewComponent } from './review/review.component';
 import { CartService } from '../../core/services/cart.service';
 import { CurrencyPipe } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -36,6 +38,7 @@ import { CurrencyPipe } from '@angular/common';
     DeliveryComponent,
     ReviewComponent,
     CurrencyPipe,
+		MatProgressSpinnerModule,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
@@ -50,12 +53,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     delivery: boolean;
   }>({ address: false, payment: false, delivery: false });
   protected confirmationToken?: ConfirmationToken;
+  protected loading = false;
 
   constructor(
     private stripeService: StripeService,
     private toaster: ToasterService,
     private accountService: AccountService,
-    protected cartService: CartService
+    protected cartService: CartService,
+		private router: Router,
   ) {}
 
   async ngOnInit() {
@@ -122,6 +127,29 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       }
     } catch (error: any) {
       this.toaster.error(error.message);
+    }
+  }
+
+  async confirmPayment(stepper: MatStepper) {
+    this.loading = true;
+    try {
+      if (this.confirmationToken) {
+        const result = await this.stripeService.confirmPayment(
+          this.confirmationToken
+        );
+        if (result.error) {
+          throw new Error(result.error.message);
+        } else {
+          this.cartService.deleteCart();
+          this.cartService.selectedDeliveryMethod.set(null);
+          this.router.navigateByUrl('/checkout/success');
+        }
+      }
+    } catch (error: any) {
+      this.toaster.error(error.message || 'Something went wrong');
+      stepper.previous();
+    } finally {
+      this.loading = false;
     }
   }
 

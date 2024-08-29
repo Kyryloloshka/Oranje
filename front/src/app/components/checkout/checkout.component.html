@@ -62,10 +62,18 @@
         <app-review [confirmationToken]="confirmationToken"></app-review>
         <div class="flex justify-between mt-6">
           <button matStepperPrevious mat-stroked-button>Back</button>
-          <button mat-flat-button>
+          <button
+            mat-flat-button
+            (click)="confirmPayment(stepper)"
+            [disabled]="!confirmationToken || loading"
+          >
+            @if (loading) {
+            <mat-spinner diameter="20"></mat-spinner>
+            } @else {
             <span
               >Підтвердити {{ cartService.totals()?.total | currency }}</span
             >
+            }
           </button>
         </div>
       </mat-step>
