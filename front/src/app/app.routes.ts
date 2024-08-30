@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { LoginComponent } from './components/account/login/login.component';
 import { authGuard } from './core/guards/auth.guard';
 import { emptyCartGuard } from './core/guards/empty-cart.guard';
+import { SuccessComponent } from './components/checkout/success/success.component';
 
 export const routes: Routes = [
   { path: '', component: ShopComponent },
@@ -16,7 +17,16 @@ export const routes: Routes = [
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard, emptyCartGuard] },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [authGuard, emptyCartGuard],
+  },
+  {
+    path: 'checkout/success',
+    component: SuccessComponent,
+    canActivate: [authGuard],
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },
